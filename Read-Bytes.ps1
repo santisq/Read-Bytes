@@ -48,7 +48,7 @@ param(
 
             $stream.Position = (
                 0, ($length - $Last)
-            )[[int]($length -and $length -gt $Last -and $length)]
+            )[[int]($length -gt $Last -and $Last)]
             
             $bytes = while($stream.Position -ne $length)
             {
