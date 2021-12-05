@@ -14,9 +14,9 @@ Pipeline compatible with [`System.IO.FileInfo`](https://docs.microsoft.com/en-us
 
 | Name | Type | Description |
 |---|---|---|
-| `FilePath` | `String` | Absolute path of the file |
-| `Length` | `Int64` | File Lenght in Bytes |
-| `Bytes` | `Object[]` | Array containing the file bytes |
+| `FilePath` | `String` | Absolute File Path |
+| `Length` | `Int64` | File Length in Bytes |
+| `Bytes` | `Object[]` | Array containing the File Bytes |
 
 ### REQUIREMENTS
 - Tested and compatible with __PowerShell v5.1__ and __PowerShell Core__.
