@@ -1,9 +1,10 @@
 function Read-Bytes {
-[cmdletbinding()]
+[cmdletbinding(DefaultParameterSetName = 'Path')]
 param(
     [parameter(
         Mandatory,
         ValueFromPipelineByPropertyName,
+        ParameterSetName = 'Path',
         Position = 0
     )][alias('FullName')]
     [ValidateScript({ 
