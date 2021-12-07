@@ -6,7 +6,8 @@ param(
         ValueFromPipelineByPropertyName,
         ParameterSetName = 'Path',
         Position = 0
-    )][alias('FullName')]
+    )]
+    [alias('FullName')]
     [ValidateScript({ 
         if(Test-Path $_ -PathType Leaf)
         {
@@ -14,7 +15,7 @@ param(
         }
         throw 'Invalid File Path'
     })]
-    [System.IO.FileInfo]$Path,
+    [string]$Path,
     [parameter(
         HelpMessage = 'Specifies the number of Bytes from the beginning of a file.',
         ParameterSetName = 'FirstBytes',
@@ -29,13 +30,23 @@ param(
     [int64]$Last
 )
 
+    begin
+    {
+        [Environment]::CurrentDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
+    }
+
     process
     {
         try
         {
+            if(-not $Path.StartsWith('\\'))
+            {
+                $Path = ([System.IO.FileInfo]$Path).FullName
+            }
+
             $reader = [System.IO.BinaryReader]::new(   
                 [System.IO.File]::Open(
-                    $Path.FullName,
+                    $Path,
                     [system.IO.FileMode]::Open,
                     [System.IO.FileAccess]::Read
                 )
@@ -57,7 +68,7 @@ param(
             }
 
             [pscustomobject]@{
-                FilePath = $Path.FullName
+                FilePath = $Path
                 Length = $length
                 Bytes = $bytes
             }
