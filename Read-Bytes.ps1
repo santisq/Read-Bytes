@@ -1,13 +1,6 @@
 function Read-Bytes {
 [cmdletbinding(DefaultParameterSetName = 'Path')]
 param(
-    [parameter(
-        Mandatory,
-        ValueFromPipelineByPropertyName,
-        ParameterSetName = 'Path',
-        Position = 0
-    )]
-    [alias('FullName')]
     [ValidateScript({ 
         if(Test-Path $_ -PathType Leaf)
         {
@@ -15,6 +8,21 @@ param(
         }
         throw 'Invalid File Path'
     })]
+    [parameter(
+        ParameterSetName = 'FirstBytes',
+        ValueFromPipelineByPropertyName
+    )]
+    [parameter(
+        ParameterSetName = 'LastBytes',
+        ValueFromPipelineByPropertyName
+    )]
+    [parameter(
+        Mandatory,
+        ValueFromPipelineByPropertyName,
+        ParameterSetName = 'Path',
+        Position = 0
+    )]
+    [alias('FullName', 'PSPath')]
     [string]$Path,
     [parameter(
         HelpMessage = 'Specifies the number of Bytes from the beginning of a file.',
@@ -32,7 +40,7 @@ param(
 
     begin
     {
-        [Environment]::CurrentDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
+        [Environment]::CurrentDirectory = $pwd.ProviderPath
     }
 
     process
