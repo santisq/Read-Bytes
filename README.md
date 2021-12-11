@@ -5,7 +5,7 @@ PowerShell function that reads file bytes using [`System.IO.BinaryReady`](https:
 Pipeline compatible with [`System.IO.FileInfo`](https://docs.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-6.0).
 
 ### PARAMETER
-- __`-Path <string>`__ Absolute file path. Alias `FullName`.
+- __`-Path <string>`__ Absolute or relative file path. Alias `FullName`.
 - __`[-First <long>]`__ Specifies the number of Bytes from the beginning of a file.
 - __`[-Last <long>]`__ Specifies the number of Bytes from the end of a file.
 - __`[<CommonParameters>]`__
